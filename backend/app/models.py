@@ -124,7 +124,8 @@ class IngredientToRecipe(models.Model):
         verbose_name_plural = 'Связи рецептов и ингредиентов'
 
     def __str__(self):
-        return f'Связь ингредиента {self.ingredient.name} и рецепта: {self.recipe.name}'
+        return (f'Связь ингредиента {self.ingredient.name}'
+                f' и рецепта: {self.recipe.name}')
 
 
 class Follow(models.Model):
