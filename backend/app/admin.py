@@ -1,24 +1,30 @@
 from django.contrib import admin
- 
+
 from .models import (Follow, Tag, Ingredient, Recipe, IngredientToRecipe,
                      Favorite, ShoppingCart)
- 
 
-'''Встроенное представление для редактирования ингредиентов в административной панели.''' 
+
+'''Встроенное представление для редактирования ингредиентов в административной панели.'''
+
+
 class IngredientInline(admin.TabularInline):
     model = IngredientToRecipe
     extra = 3
- 
+
 
 '''Настройки административной панели для модели рецептов, включая список рецептов, поиск и фильтрацию по тегам.'''
+
+
 class RecipeAdmin(admin.ModelAdmin):
     list_display = ('author', 'name', 'cooking_time')
     search_fields = ('author__username', 'author__email', 'name')
-    list_filter = ['tags',]
+    list_filter = ['tags', ]
     inlines = (IngredientInline,)
- 
+
 
 '''Настройки административной панели для модели подписок на авторов.'''
+
+
 class FollowAdmin(admin.ModelAdmin):
     list_display = (
         'user',
@@ -26,9 +32,11 @@ class FollowAdmin(admin.ModelAdmin):
     )
     search_fields = ('user__username', 'user__email')
     empty_value_display = '-пусто-'
- 
+
 
 '''Настройки административной панели для модели тегов.'''
+
+
 class TegAdmin(admin.ModelAdmin):
     list_display = (
         'name',
@@ -36,9 +44,11 @@ class TegAdmin(admin.ModelAdmin):
         'slug',
     )
     empty_value_display = '-пусто-'
- 
+
 
 '''Настройки административной панели для модели ингредиентов.'''
+
+
 class IngredientAdmin(admin.ModelAdmin):
     list_display = (
         'name',
