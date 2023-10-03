@@ -4,7 +4,7 @@ from .models import (Follow, Tag, Ingredient, Recipe, IngredientToRecipe,
                      Favorite, ShoppingCart)
 
 
-'''Встроенное представление для редактирования ингредиентов в административной панели.'''
+'''Встроенное представление для редактирования ингредиентов в админ панели.'''
 
 
 class IngredientInline(admin.TabularInline):
@@ -12,7 +12,8 @@ class IngredientInline(admin.TabularInline):
     extra = 3
 
 
-'''Настройки административной панели для модели рецептов, включая список рецептов, поиск и фильтрацию по тегам.'''
+'''Настройки административной панели для модели рецептов, 
+   включая список рецептов, поиск и фильтрацию по тегам.'''
 
 
 class RecipeAdmin(admin.ModelAdmin):
