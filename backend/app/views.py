@@ -138,4 +138,3 @@ class RecipeWiewSet(viewsets.ModelViewSet):
             'ingredient__name', 'ingredient__measurement_unit'
         ).annotate(amount=Sum('amount'))
         return self.send_message(ingredients)
-
