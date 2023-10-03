@@ -186,7 +186,7 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
             'cooking_time',
         )
 
-    def validate(self, data):
+    def validate(self, data):  # noqa: C901
         request = self.context.get('request', None)
         tags_list = []
         ingredients_list = []
