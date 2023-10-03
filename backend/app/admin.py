@@ -45,11 +45,13 @@ class IngredientAdmin(admin.ModelAdmin):
         'measurement_unit',
     )
     search_fields = ('name',)
-    list_filter = ['measurement_unit',]
+    list_filter = ['measurement_unit', ]
     empty_value_display = '-пусто-'
- 
+
 
 '''Настройки административной панели для модели, связывающей ингредиенты и рецепты.'''
+
+
 class IngredientToRecipeAdmin(admin.ModelAdmin):
     list_display = (
         'ingredient',
@@ -57,11 +59,13 @@ class IngredientToRecipeAdmin(admin.ModelAdmin):
         'amount',
     )
     search_fields = ['ingredient__name', 'recipe__name']
-    list_filter = ['recipe__tags',]
+    list_filter = ['recipe__tags', ]
     empty_value_display = '-пусто-'
- 
+
 
 '''Настройки административной панели для модели избранных рецептов.'''
+
+
 class FavoriteAdmin(admin.ModelAdmin):
     list_display = (
         'user',
@@ -70,19 +74,21 @@ class FavoriteAdmin(admin.ModelAdmin):
     list_filter = ('recipe__tags__name',)
     search_fields = ['user__email', 'user__username', 'recipe__name']
     empty_value_display = '-пусто-'
- 
+
 
 '''Настройки административной панели для модели корзины покупок.'''
+
+
 class ShoppingCartAdmin(admin.ModelAdmin):
     list_display = (
         'user',
         'recipe',
     )
     search_fields = ['user__email', 'user__username', 'recipe__name']
-    list_filter = ['recipe__tags',]
+    list_filter = ['recipe__tags', ]
     empty_value_display = '-пусто-'
- 
- 
+
+
 admin.site.register(Follow, FollowAdmin)
 admin.site.register(Tag, TegAdmin)
 admin.site.register(Ingredient, IngredientAdmin)
