@@ -160,7 +160,8 @@ class Follow(models.Model):
         verbose_name_plural = 'Подписки'
 
     def __str__(self):
-        return f'Подписка {self.user.get_username} на: {self.author.get_username}'
+        return (f'Подписка {self.user.get_username}'
+                f' на: {self.author.get_username}')
 
     def clean(self):
         if self.user == self.author:
@@ -200,7 +201,8 @@ class Favorite(models.Model):
         verbose_name_plural = 'Избранные рецепты'
 
     def __str__(self):
-        return f'Избранный рецепт {self.recipe.name} пользователя: {self.user.get_username}'
+        return (f'Избранный рецепт {self.recipe.name}'
+                f' пользователя: {self.user.get_username}')
 
 
 class ShoppingCart(models.Model):
@@ -230,4 +232,5 @@ class ShoppingCart(models.Model):
         verbose_name_plural = 'Список покупок'
 
     def __str__(self):
-        return f'Рецепт {self.recipe.name} в списке покупок пользователя: {self.user.get_username}'
+        return (f'Рецепт {self.recipe.name}'
+                f' в списке покупок пользователя: {self.user.get_username}')
