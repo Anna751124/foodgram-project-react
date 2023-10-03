@@ -27,7 +27,6 @@ class TegSerializer(serializers.ModelSerializer):
 
 
 class ShortResipeSerializer(serializers.ModelSerializer):
-    """Сериализатор рецептов для простого короткого отображения"""
 
     class Meta:
         model = Recipe

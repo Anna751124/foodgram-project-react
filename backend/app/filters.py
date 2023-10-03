@@ -6,7 +6,7 @@ from .models import Recipe, Tag, Ingredient
 
 
 class IngredientFilter(SearchFilter):
-    """Специальный фильтр для ингредиентов"""
+    """Фильтр для ингредиентов"""
 
     search_param = 'name'
 

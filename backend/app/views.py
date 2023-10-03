@@ -113,9 +113,6 @@ class RecipeWiewSet(viewsets.ModelViewSet):
 
     @staticmethod
     def send_message(ingredients):
-        """
-        Посылает сообщение дублирующее скачиваемый список
-        """
         shopping_list = 'Купить в магазине:'
         for ingredient in ingredients:
             shopping_list += (

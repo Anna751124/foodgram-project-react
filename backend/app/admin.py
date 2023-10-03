@@ -4,16 +4,9 @@ from .models import (Follow, Tag, Ingredient, Recipe, IngredientToRecipe,
                      Favorite, ShoppingCart)
 
 
-'''Встроенное представление для редактирования ингредиентов в админ панели.'''
-
-
 class IngredientInline(admin.TabularInline):
     model = IngredientToRecipe
     extra = 3
-
-
-'''Настройки административной панели для модели рецептов,
-   включая список рецептов, поиск и фильтрацию по тегам.'''
 
 
 class RecipeAdmin(admin.ModelAdmin):
@@ -21,9 +14,6 @@ class RecipeAdmin(admin.ModelAdmin):
     search_fields = ('author__username', 'author__email', 'name')
     list_filter = ['tags', ]
     inlines = (IngredientInline,)
-
-
-'''Настройки административной панели для модели подписок на авторов.'''
 
 
 class FollowAdmin(admin.ModelAdmin):
@@ -35,9 +25,6 @@ class FollowAdmin(admin.ModelAdmin):
     empty_value_display = '-пусто-'
 
 
-'''Настройки административной панели для модели тегов.'''
-
-
 class TegAdmin(admin.ModelAdmin):
     list_display = (
         'name',
@@ -45,9 +32,6 @@ class TegAdmin(admin.ModelAdmin):
         'slug',
     )
     empty_value_display = '-пусто-'
-
-
-'''Настройки административной панели для модели ингредиентов.'''
 
 
 class IngredientAdmin(admin.ModelAdmin):
@@ -58,9 +42,6 @@ class IngredientAdmin(admin.ModelAdmin):
     search_fields = ('name',)
     list_filter = ['measurement_unit', ]
     empty_value_display = '-пусто-'
-
-
-'''Настройки админ панели для модели, связывающей ингредиенты и рецепты.'''
 
 
 class IngredientToRecipeAdmin(admin.ModelAdmin):
@@ -74,9 +55,6 @@ class IngredientToRecipeAdmin(admin.ModelAdmin):
     empty_value_display = '-пусто-'
 
 
-'''Настройки административной панели для модели избранных рецептов.'''
-
-
 class FavoriteAdmin(admin.ModelAdmin):
     list_display = (
         'user',
@@ -85,9 +63,6 @@ class FavoriteAdmin(admin.ModelAdmin):
     list_filter = ('recipe__tags__name',)
     search_fields = ['user__email', 'user__username', 'recipe__name']
     empty_value_display = '-пусто-'
-
-
-'''Настройки административной панели для модели корзины покупок.'''
 
 
 class ShoppingCartAdmin(admin.ModelAdmin):
