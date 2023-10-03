@@ -5,6 +5,8 @@ User = get_user_model()
 
 
 '''Настройки административной панели для модели пользователей. '''
+
+
 class UserAdmin(admin.ModelAdmin):
     list_display = (
         'email',
