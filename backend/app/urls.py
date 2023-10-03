@@ -2,7 +2,7 @@ from django.urls import include, path
 from rest_framework import routers
 
 from .views import TagViewSet, RecipeWiewSet, ShoppingCartMixin,\
-     FavoriteMixin, IngredientMixin
+    FavoriteMixin, IngredientMixin
 
 
 router_v1 = routers.DefaultRouter()

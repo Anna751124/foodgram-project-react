@@ -205,7 +205,7 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
 
                 if len(tags_list) == 0:
                     raise serializers.ValidationError(
-                            'Список тегов не должен быть пустым')
+                        'Список тегов не должен быть пустым')
 
                 all_tags = Tag.objects.all().values_list('id', flat=True)
                 if not set(tags_list).issubset(all_tags):
@@ -231,7 +231,7 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
 
                 if len(ingredients_list) == 0:
                     raise serializers.ValidationError(
-                            'Список ингредиентов не должен быть пустым')
+                        'Список ингредиентов не должен быть пустым')
         return data
 
     @staticmethod
@@ -268,7 +268,7 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         return RecipeReadSerializer(instance, context={
-                 'request': self.context.get('request')
+            'request': self.context.get('request')
             }).data
 
 
