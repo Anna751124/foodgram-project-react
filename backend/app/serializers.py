@@ -206,7 +206,7 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
                     raise serializers.ValidationError(
                         'Список тегов не должен быть пустым')
 
-                all_tags = Tag.objects.all().values_list('id', flat=True)
+                all_tags = Tag.objects.values_list('id', flat=True)
                 if not set(tags_list).issubset(all_tags):
                     raise serializers.ValidationError(
                         F'Тега {tag} не существует')
@@ -221,7 +221,7 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
                             F'Ингредиент {ingredient} повторяется')
                     ingredients_list.append(ingredient)
 
-                all_ingredients = Ingredient.objects.all().values_list(
+                all_ingredients = Ingredient.objects.values_list(
                     'id', flat=True)
 
                 if not set(ingredients_list).issubset(all_ingredients):
