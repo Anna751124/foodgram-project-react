@@ -235,18 +235,18 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
 
     @staticmethod
     def create_ingredients(recipe, ingredients):
-        ingredient_liist = []
+        ingredient_list = []
         for ingredient_data in ingredients:
             ingredient_obj = Ingredient.objects.get(
                 id=ingredient_data.get('ingredient')['id'])
-            ingredient_liist.append(
+            ingredient_list.append(
                 IngredientToRecipe(
                     ingredient=ingredient_obj,
                     amount=ingredient_data.get('amount'),
                     recipe=recipe,
                 )
             )
-        IngredientToRecipe.objects.bulk_create(ingredient_liist)
+        IngredientToRecipe.objects.bulk_create(ingredient_list)
 
     def create(self, validated_data):
         request = self.context.get('request', None)

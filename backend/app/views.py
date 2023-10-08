@@ -24,6 +24,12 @@ from .pagination import CustomPagination
 User = get_user_model()
 
 
+class ListCreateDelViewSet(mixins.DestroyModelMixin,
+    mixins.CreateModelMixin,
+    viewsets.GenericViewSet):
+    pass
+
+
 class IngredientMixin(viewsets.ReadOnlyModelViewSet):
     """Отображение одного ингредиента или списка"""
 
@@ -34,11 +40,7 @@ class IngredientMixin(viewsets.ReadOnlyModelViewSet):
     search_fields = ('^name', )
 
 
-class ShoppingCartMixin(
-    mixins.DestroyModelMixin,
-    mixins.CreateModelMixin,
-    viewsets.GenericViewSet
-):
+class ShoppingCartMixin(ListCreateDelViewSet):
     """Создание и удаление объекта списка покупок"""
 
     queryset = Recipe.objects.all()
@@ -60,11 +62,7 @@ class ShoppingCartMixin(
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-class FavoriteMixin(
-    mixins.DestroyModelMixin,
-    mixins.CreateModelMixin,
-    viewsets.GenericViewSet
-):
+class FavoriteMixin(ListCreateDelViewSet):
     """Создание и удаление объекта избранного"""
 
     queryset = Recipe.objects.all()

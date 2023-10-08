@@ -14,7 +14,6 @@ User = get_user_model()
 
 
 class CustomUserViewSet(UserViewSet):
-    """Переопределение сериализатора для соответствия ТЗ"""
 
     pagination_class = CustomPagination
 
