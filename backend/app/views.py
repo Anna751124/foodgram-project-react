@@ -24,9 +24,11 @@ from .pagination import CustomPagination
 User = get_user_model()
 
 
-class ListCreateDelViewSet(mixins.DestroyModelMixin,
+class ListCreateDelViewSet(
+    mixins.DestroyModelMixin,
     mixins.CreateModelMixin,
-    viewsets.GenericViewSet):
+    viewsets.GenericViewSet
+):
     pass
 
 

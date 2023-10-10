@@ -8,6 +8,7 @@ class IngredientInline(admin.TabularInline):
     model = IngredientToRecipe
     extra = 3
 
+
 @admin.register(Recipe)
 class RecipeAdmin(admin.ModelAdmin):
     list_display = ('author', 'name', 'cooking_time')
