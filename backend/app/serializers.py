@@ -164,9 +164,8 @@ class RecipeReadSerializer(serializers.ModelSerializer):
         ).exists()
 
 
-class RecipeCreateSerializer(serializers.ModelSerializer):
+class RecipeCreateSerializer(serializers.ModelSerializer): 
     """Сериализатор создания рецептов"""
-
     tags = serializers.PrimaryKeyRelatedField(
         queryset=Tag.objects.all(),
         many=True)
@@ -272,7 +271,6 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
 
 
 class FollowSerializer(CustomUserSerializer):
-    """Сериализатор ингредиентов"""
 
     recipes = serializers.SerializerMethodField(read_only=True)
     recipes_count = serializers.SerializerMethodField(read_only=True)

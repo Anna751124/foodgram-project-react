@@ -76,12 +76,12 @@ class FavoriteMixin(ListCreateDelViewSet):
         instance = Favorite.objects.filter(
             user=request.user, recipe=recipe)
 
-        if not instance:
-            raise serializers.ValidationError(
-                'В корзине нет данного товара'
-            )
-        self.perform_destroy(instance)
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        if instance.exists():
+            instance.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response({
+            'errors': 'Рецепт уже удален'
+        }, status=status.HTTP_400_BAD_REQUEST)
 
 
 class TagViewSet(
@@ -99,7 +99,7 @@ class RecipeWiewSet(viewsets.ModelViewSet):
     """Отображение и создание рецептов"""
 
     permission_classes = (AuthorIsRequestUserPermission, )
-    queryset = Recipe.objects.all()
+    queryset = Recipe.objects.select_related('author').all()
     serializer_class = RecipeCreateSerializer
     filter_class = MyFilterSet
     pagination_class = CustomPagination
