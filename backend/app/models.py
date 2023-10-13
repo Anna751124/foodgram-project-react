@@ -49,6 +49,10 @@ class Ingredient(models.Model):
     class Meta:
         verbose_name = 'Ингредиент'
         verbose_name_plural = 'Ингредиенты'
+        constraints = [
+            models.UniqueConstraint(
+                fields=('name', 'measurement_unit'),
+                name='unique_name_measurement_unit')]
 
     def __str__(self):
         return f'{self.name}'
@@ -88,7 +92,7 @@ class Recipe(models.Model):
     cooking_time = models.PositiveSmallIntegerField(
         validators=[
             MinValueValidator(1, message='Не менее одной минуты'),
-            MaxValueValidator(1440, message='Не долше 24 часов'),
+            MaxValueValidator(1440, message='Не дольше 24 часов'),
         ],
     )
 

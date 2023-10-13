@@ -18,7 +18,7 @@ class IngredientSerializer(serializers.ModelSerializer):
         fields = ('id', 'name', 'measurement_unit')
 
 
-class TegSerializer(serializers.ModelSerializer):
+class TagSerializer(serializers.ModelSerializer):
     """Сериализатор тегов"""
 
     class Meta:
@@ -141,7 +141,7 @@ class RecipeReadSerializer(serializers.ModelSerializer):
                         'is_favorited')
 
     def get_tags(self, obj):
-        return TegSerializer(
+        return TagSerializer(
             Tag.objects.filter(recipes=obj),
             many=True,).data
 

@@ -15,7 +15,7 @@ from .models import Tag, Recipe, ShoppingCart, Favorite, Ingredient,\
     IngredientToRecipe
 from .serializers import (
     RecipeCreateSerializer, ShoppingCartSerializer,
-    FavoriteSerializer, IngredientSerializer, TegSerializer,
+    FavoriteSerializer, IngredientSerializer, TagSerializer,
     RecipeReadSerializer)
 from .permissions import AuthorIsRequestUserPermission
 from .filters import MyFilterSet, IngredientFilter
@@ -94,15 +94,15 @@ class TagViewSet(
     """Отображение одного тега или списка"""
 
     queryset = Tag.objects.all()
-    serializer_class = TegSerializer
+    serializer_class = TagSerializer
 
 
 class RecipeWiewSet(viewsets.ModelViewSet):
     """Отображение и создание рецептов"""
 
     permission_classes = (AuthorIsRequestUserPermission, )
-    queryset = Recipe.objects.select_related('author').all()
-    serializer_class = RecipeCreateSerializer
+    queryset = Recipe.objects.select_related('author').prefetch_related(
+        'ingredients').all()
     filter_class = MyFilterSet
     pagination_class = CustomPagination
 
