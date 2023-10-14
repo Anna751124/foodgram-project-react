@@ -171,7 +171,6 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
         many=True)
     ingredients = IngredientToRecipeSerializer(
         many=True,)
-#        source='ingredienttorecipe')
     image = Base64ImageField()
     author = UserSerializer(read_only=True)
     cooking_time = serializers.IntegerField()
@@ -216,52 +215,6 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
                 raise serializers.ValidationError(
                     'Количество ингредиента больше 0')
         return ingredients
-#    def validate(self, data):  # noqa: C901
-#        request = self.context.get('request', None)
-#        tags_list = []
-#        ingredients_list = []
-#        request_methods = ['POST', 'PATCH']
-#
-#        if request.method in request_methods:
-#            if 'tags' in data:
-#                tags = data['tags']
-#
-#                for tag in tags:
-#                    if tag.id in tags_list:
-#                        raise serializers.ValidationError(
-#                            F'Тег {tag} повторяется')
-#                    tags_list.append(tag.id)
-#
-#                if len(tags_list) == 0:
-#                    raise serializers.ValidationError(
-#                        'Список тегов не должен быть пустым')
-#
-#                all_tags = Tag.objects.values_list('id', flat=True)
-#                if not set(tags_list).issubset(all_tags):
-#                    raise serializers.ValidationError(
-#                        F'Тега {tag} не существует')
-#
-#            if 'ingredienttorecipe' in data:
-#                ingredients = data['ingredienttorecipe']
-#                for ingredient in ingredients:
-#                    ingredient = ingredient['ingredient'].get('id')
-#
-#                    if ingredient['id'] in ingredients_list:
-#                        raise serializers.ValidationError(
-#                            F'Ингредиент {ingredient} повторяется')
-#                    ingredients_list.append(ingredient['id'])
-#
-#                all_ingredients = Ingredient.objects.values_list(
-#                    'id', flat=True)
-#
-#                if not set(ingredients_list).issubset(all_ingredients):
-#                    raise serializers.ValidationError(
-#                        'Указанного ингредиента не существует')
-#
-#                if len(ingredients_list) == 0:
-#                    raise serializers.ValidationError(
-#                        'Список ингредиентов не должен быть пустым')
-#        return data
 
     @staticmethod
     def create_ingredients(recipe, ingredients):
@@ -275,19 +228,6 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
                 )
             )
         IngredientToRecipe.objects.bulk_create(ingredient_liist)
-#    @staticmethod
-#    def create_ingredients(recipe, ingredients):
-#        ingredient_list = []
-#        for ingredient_data in ingredients:
-#            ingredient_list.append(
-#                IngredientToRecipe(
-#                    ingredient=Ingredient.objects.get(
-#                        id=ingredient_data.get('ingredient')['id']),
-#                    amount=ingredient_data.get('amount'),
-#                    recipe=recipe,
-#                )
-#            )
-#        IngredientToRecipe.objects.bulk_create(ingredient_list)
 
     def create(self, validated_data):
         request = self.context.get('request', None)
