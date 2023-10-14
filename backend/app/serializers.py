@@ -187,7 +187,7 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
             'text',
             'cooking_time',
         )
-    
+
     def validate_tags(self, tags):
         for tag in tags:
             if not Tag.objects.filter(id=tag.id).exists():
@@ -218,16 +218,16 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
 
     @staticmethod
     def create_ingredients(recipe, ingredients):
-        ingredient_liist = []
+        ingredient_list = []
         for ingredient_data in ingredients:
-            ingredient_liist.append(
+            ingredient_list.append(
                 IngredientToRecipe(
                     ingredient=ingredient_data.pop('id'),
                     amount=ingredient_data.pop('amount'),
                     recipe=recipe,
                 )
             )
-        IngredientToRecipe.objects.bulk_create(ingredient_liist)
+        IngredientToRecipe.objects.bulk_create(ingredient_list)
 
     def create(self, validated_data):
         request = self.context.get('request', None)
