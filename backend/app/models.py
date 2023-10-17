@@ -31,7 +31,7 @@ class Tag(models.Model):
         verbose_name_plural = 'Теги'
 
     def __str__(self):
-        return f'{self.name}'
+        return self.name
 
 
 class Ingredient(models.Model):
@@ -55,7 +55,7 @@ class Ingredient(models.Model):
                 name='unique_name_measurement_unit')]
 
     def __str__(self):
-        return f'{self.name}'
+        return self.name
 
 
 class Recipe(models.Model):
@@ -84,7 +84,7 @@ class Recipe(models.Model):
     )
     image = models.ImageField(
         verbose_name='Изображение',
-        upload_to='app/',
+        upload_to='media/',
     )
     text = models.TextField(
         verbose_name='Текст'
