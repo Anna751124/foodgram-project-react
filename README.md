@@ -30,6 +30,7 @@ sudo docker compose -f docker-compose.production.yml exec backend python manage.
 4. Данные для проверки работы приложения:
 Суперпользователь:
 ```
+login: adminn
 email: admin@mail.ru
 password: Diplom1748
 ```
