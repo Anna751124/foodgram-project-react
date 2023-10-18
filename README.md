@@ -26,7 +26,7 @@ sudo apt install docker-compose
 ```
 sudo docker compose -f docker-compose.production.yml up -d --build
 sudo docker compose -f docker-compose.production.yml exec backend python manage.py migrate
-
+```
 4. Данные для проверки работы приложения:
 Суперпользователь:
 ```
