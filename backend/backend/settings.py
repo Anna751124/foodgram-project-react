@@ -8,8 +8,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 
-SECRET_KEY = 'uv9--^3e+9v794-%#66*pzks@hi1p$bn!3&j9y6ij5q&dh-w%6'
-
 DEBUG = False
 
 ALLOWED_HOSTS = ['*']

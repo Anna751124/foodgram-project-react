@@ -284,7 +284,7 @@ class FollowSerializer(CustomUserSerializer):
         limit = request.GET.get('recipes_limit')
         recipes = obj.recipes.all()
         if limit:
-            recipes = recipes[: int(limit)]
+            recipes = recipes[:int(limit)]
         serializer = ShortResipeSerializer(recipes, many=True, read_only=True)
         return serializer.data
 

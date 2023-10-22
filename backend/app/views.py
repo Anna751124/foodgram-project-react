@@ -101,8 +101,11 @@ class RecipeWiewSet(viewsets.ModelViewSet):
     """Отображение и создание рецептов"""
 
     permission_classes = (AuthorIsRequestUserPermission, )
-    queryset = Recipe.objects.select_related('author').prefetch_related(
-        'ingredients')
+    queryset = Recipe.objects.select_related(
+        'author'
+        ).prefetch_related(
+        'ingredients'
+        )
     filter_class = MyFilterSet
     pagination_class = CustomPagination
 
