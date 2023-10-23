@@ -194,7 +194,10 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
                 raise serializers.ValidationError(
                     'Указанного тега не существует')
         return tags
-
+    
+    def get_tag_count(self, obj):
+        return Tag.objects.filter(created_by = obj).count()
+    
     def validate_cooking_time(self, cooking_time):
         if cooking_time < 1:
             raise serializers.ValidationError(

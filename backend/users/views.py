@@ -9,6 +9,7 @@ from django.shortcuts import get_object_or_404
 from app.models import Follow
 from app.serializers import FollowSerializer
 from app.pagination import CustomPagination
+from app.mixins import ListCreateDelViewSet
 
 User = get_user_model()
 
@@ -31,11 +32,7 @@ class FollowListMixin(mixins.ListModelMixin, viewsets.GenericViewSet):
         return User.objects.filter(following__user=self.request.user)
 
 
-class FollowMixin(
-    mixins.CreateModelMixin,
-    mixins.DestroyModelMixin,
-    viewsets.GenericViewSet
-):
+class FollowMixin(ListCreateDelViewSet):
     """Создание и удаление модели подписок"""
 
     serializer_class = FollowSerializer
