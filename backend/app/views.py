@@ -67,14 +67,14 @@ class FavoriteMixin(ListCreateDelViewSet):
     def delete(self, request, *args, **kwargs):
         recipe_id = self.kwargs.get('recipe_id')
         recipe = get_object_or_404(Recipe, pk=recipe_id)
-
-        if not Favorite.objects.filter(author=request.user,
-                                       recipe=recipe).exists():
-            return Response({'errors': 'Объект не найден'},
-                            status=status.HTTP_404_NOT_FOUND)
-        Favorite.objects.get(recipe=recipe).delete()
-        return Response('Рецепт успешно удалён из избранного.',
-                        status=status.HTTP_204_NO_CONTENT)
+        instance = Favorite.objects.filter(
+            user=request.user, recipe=recipe)
+        if instance.exists():
+            instance.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response({
+            'errors': 'Рецепт уже удален'
+        }, status=status.HTTP_400_BAD_REQUEST)
 
 
 class TagViewSet(
