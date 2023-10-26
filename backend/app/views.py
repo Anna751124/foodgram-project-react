@@ -69,8 +69,7 @@ class FavoriteMixin(ListCreateDelViewSet):
         recipe = get_object_or_404(Recipe, pk=recipe_id)
         instance = Favorite.objects.filter(
             user=request.user, recipe=recipe)
-        if instance.exists():
-            instance.delete()
+        if instance.delete():
             return Response(status=status.HTTP_204_NO_CONTENT)
         return Response({
             'errors': 'Рецепт уже удален'
