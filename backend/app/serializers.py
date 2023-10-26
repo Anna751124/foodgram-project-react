@@ -189,10 +189,18 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
         )
 
     def validate_tags(self, tags):
+        if not tags:
+                raise serializers.ValidationError(
+                {"tags": "Поле тегов не может быть пустым!"}
+            )
         for tag in tags:
             if not Tag.objects.filter(id=tag.id).exists():
                 raise serializers.ValidationError(
                     'Указанного тега не существует')
+            if len(set(tags)) != len(tags):
+                raise serializers.ValidationError(
+                {"tags": "Теги не должны повторяться!"}
+            )
         return tags
 
     def get_tag_count(self, obj):
@@ -218,6 +226,23 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
                 raise serializers.ValidationError(
                     'Количество ингредиента больше 0')
         return ingredients
+    
+    def validate_image(self, image):
+        if not image:
+            raise serializers.ValidationError(
+                {"image": "Поле изображения не может быть пустым!"}
+            )
+        return image
+    
+    def is_valid(self, raise_exception=False):
+        if (
+                'tags' not in self.initial_data or 'ingredients' not in
+                self.initial_data
+        ):
+            raise serializers.ValidationError(
+                {'tags': ['Это поле обязательно.'],
+                 'ingredients': ['Это поле обязательно.']})
+        return super().is_valid(raise_exception=raise_exception)
 
     @staticmethod
     def create_ingredients(recipe, ingredients):
