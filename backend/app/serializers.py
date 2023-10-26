@@ -191,8 +191,8 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
     def validate_tags(self, tags):
         if not tags:
             raise serializers.ValidationError(
-                    {"tags": "Поле тегов не может быть пустым!"}
-                )
+                {"tags": "Поле тегов не может быть пустым!"}
+            )
         for tag in tags:
             if not Tag.objects.filter(id=tag.id).exists():
                 raise serializers.ValidationError(
